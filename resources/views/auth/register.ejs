@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <%- include('../partials/navbar.ejs')%>
+            <section class="login">
+                <div class=" flex items-center justify-center bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-md w-full space-y-4 ">
+                        <div>
+                            
+                                <img class="mx-auto" src="/img/pizzas.svg" alt="" height="200px" width="200px">
+                            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                                Register your account
+                            </h2>
+
+                        </div>
+
+                        <div class="rounded bg-white max-w-md rounded overflow-hidden shadow-xl p-5">
+
+                            <form class="space-y-4" action="" method="POST">
+                                <input type="hidden" name="remember" value="True">
+                                <div class="rounded-md shadow-sm -space-y-px">
+                                    <div class="grid gap-6">
+                                        <div class="col-span-12">
+                                            <label for="first_name"
+                                                class="block text-sm font-medium text-gray-700">Name</label>
+                                            <input type="text" name="first_name" id="first_name"
+                                                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-xl border-gray-300 rounded-md">
+                                        </div>
+
+                                        <div class="col-span-12">
+                                            <label for="email_address"
+                                                class="block text-sm font-medium text-gray-700">Email address</label>
+                                            <input type="text" name="email_address" id="email_address"
+                                                autocomplete="email"
+                                                class="mt-1  focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-xl border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="col-span-12">
+                                            <label for="first_name"
+                                                class="block text-sm font-medium text-gray-700">Password</label>
+                                            <input type="password" name="first_name" id="first_name"
+                                                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-xl border-gray-300 rounded-md">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div >
+                                    
+
+                                    <div class="text-sm text-right">
+                                        <a href="/login" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            Already have an account😛
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                    <button type="submit"
+                                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                                            <!-- Heroicon name: solid/lock-closed -->
+                                            <svg class="h-5 w-5 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                fill="currentColor" aria-hidden="True">
+                                                <path fill-rule="evenodd"
+                                                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                        Sign in
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+            </section>
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    </body>
+
+</html>

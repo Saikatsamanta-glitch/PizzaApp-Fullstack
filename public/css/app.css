@@ -1,0 +1,66 @@
+body{
+    font-family: 'Lato',sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: rgb(68, 68, 68);  
+}
+
+nav li:last-child a{
+    background-color: rgb(255, 208, 0);
+}
+nav li:last-child a:hover{
+    background-color: orangered;
+}
+nav li a:hover{
+    transition: all 0.2s ease-in-out;
+    color: rgb(255, 153, 0);
+}
+section.hero{
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: azure;
+}
+.nav{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.size{
+    background-color:rgb(218, 218, 218);
+}
+.add-to-cart{
+    transition: all .3s ease-in-out;
+    border: 2px solid rgb(255, 153, 0);
+    color: rgb(255, 153, 0);
+}
+.add-to-cart:hover{
+    background-color: rgb(255, 153, 0);
+    color: white;
+}
+.order{
+    color: white;
+    background-color: orangered;
+    transition: all .3s ease-in-out;
+}
+.order:hover{
+    background-color: white;
+    color: orangered;
+}
+.grids{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    row-gap: 80px;
+}
+.go-back{
+    background-color: orangered;
+}
+.empty-cart{
+    background-color: azure;
+}
+.amount{
+    color: orangered;
+}
+.btn-primary{
+    background-color: orangered;
+}
+.group{
+    background-color: orangered;
+}

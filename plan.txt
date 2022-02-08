@@ -1,0 +1,15 @@
+o Create directory structure
+o Create a NPM and install all dependancies
+    - dependancies
+        -express
+        -ejs express-ejs-layouts
+    -dev dependancies
+        -nodemon
+o Create Express server -Create a server.js file
+o Create Home pafe using html and css
+    -Include tailwind css 
+o Create cart page
+    -order summary section
+    -empty cart section
+o Create Order controller and link it in server.js
+o Create iders view                   
