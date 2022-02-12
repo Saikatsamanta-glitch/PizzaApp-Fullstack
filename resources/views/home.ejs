@@ -3,38 +3,81 @@
 
 <%- include('partials/head.ejs')%>
 
-<body >
-    <%- include('partials/navbar.ejs')%>
+    <body>
+        <%- include('partials/navbar.ejs')%>
 
-    <section class="hero py-16">
-        <div class="container mx-auto flex items-center justify-between">
-            <div class="w-1/2">
-                <h6 class="text-lg "><em>Are you hungry?</em></h6>
-                <h1 class="text-6xl font-bold">Don't wait</h1>
-                <button class="order px-6 py-2 rounded-full text-white font-bold mt-4">Order Now</button>
-            </div>
-            <div class="w-1/2 items-center">
-                <img src="/img/hero-pizza.png" alt="" height="300px" width="500px">
-            </div>
-        </div>
-    </section>
+            <section class="hero py-16">
+                <div class="container mx-auto flex items-center justify-between">
+                    <div class="w-1/2">
+                        <h6 class="text-lg "><em>Are you hungry?</em></h6>
+                        <h1 class="text-6xl font-bold">Don't wait</h1>
+                        <button class="order px-6 py-2 rounded-full text-white font-bold mt-4">Order Now</button>
+                    </div>
+                    <div class="w-1/2 items-center">
+                        <img src="/img/hero-pizza.png" alt="" height="300px" width="500px">
+                    </div>
+                </div>
+            </section>
 
-    <!-- menu with order button -->
-    <section class="menu container mx-auto py-8 px-16">
-        <h1 class="text-xl font-bold mb-8">All Pizzas</h1>
-        <div class="grids ">
-            <%- include('partials/cards.ejs')%>
-            <%- include('partials/cards.ejs')%>
-            <%- include('partials/cards.ejs')%>
-            <%- include('partials/cards.ejs')%>
-            <%- include('partials/cards.ejs')%>
-            <%- include('partials/cards.ejs')%>        
-    </section>
+            <!-- menu with order button -->
+            <section class="menu container mx-auto py-8 px-16">
+                <h1 class="text-xl font-bold mb-8">All Pizzas</h1>
+                <div class="grids ">
+                    <% pizzas.forEach(function(pizza,index){ %>
+                        <div class="w-64">
+                            <img class="h-40 mb-4 mx-auto" src="/img/<%= pizza.image %>" alt="">
+                            <div class="text-center">
+                                <h2 class="mb-4 text-lg">
+                                    <%= pizza.name%>
+                                </h2>
+                                <span class="size py-1 px-4 rounded-full uppercase text-xs">
+                                    <%= pizza.size%>
+                                </span>
+                                <div class="flex items-center justify-around mt-6">
+                                    <span class="font-bold">₹<%= pizza.price%> </span>
+                                    <button data-pizza="<%= JSON.stringify(pizza)%>" data-index="<%= index%>"
+                                        class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold" onclick="added()">
+                                        <span>+</span>
+                                        <span class="add ml-4">Add</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <% })%>
+                </div>
+            </section>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+            <script type="module" defer src="/js/app.js"></script>
 
-    
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="/js/app.js"></script>
-</body>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+            <script>
+
+                function added(){
+                    toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "3000",
+                    
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                  }
+                  toastr.options.onclick = function() {window.location.replace('/cart');  }
+                Command: toastr["success"]("Click over me to check out 😉", "🍕Added to cart")
+                }
+                
+            </script>
+    </body>
 
 </html>
