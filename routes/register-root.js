@@ -14,7 +14,6 @@ router.post('/', async (req, res) => {
             req.flash('error', 'email already exists')
             return res.redirect('/register');
         }
-
     // Hashing password for security
     const hashedpass = await bcrypt.hash(password, 10);
 
@@ -24,7 +23,6 @@ router.post('/', async (req, res) => {
         email: email,
         password: hashedpass
     });
-
     await user.save().then(() => {
         // Login will be added here
         return res.redirect('/login')
@@ -32,9 +30,6 @@ router.post('/', async (req, res) => {
         req.flash('error', 'something went wrong')
         return res.redirect('/register');
     });
-
-
-
 })
 
 module.exports = router;

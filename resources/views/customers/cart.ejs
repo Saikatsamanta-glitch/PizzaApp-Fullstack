@@ -4,80 +4,179 @@
 
     <body>
         <%- include('../partials/navbar.ejs')%>
+            <%= session.orderId %>
+                <section class="cart py-16">
+                    <% if(session.cart){ %>
+                        <div class="orders container mx-auto w-1/2">
+                            <div class="flex items-center border-b border-grey-300 pb-4">
+                                <img src="/img/cart-black.png" alt="">
+                                <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
+                            </div>
 
-            <section class="cart py-16">
-                <% if(session.cart){ %>
-                    <div class="orders container mx-auto w-1/2">
-                        <div class="flex items-center border-b border-grey-300 pb-4">
-                            <img src="/img/cart-black.png" alt="">
-                            <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
-                        </div>
 
-
-                        <div class="pizza-list">
-                            <% for(let pizza of Object.values(session.cart.items)){ %>
-                                <div class="flex items-center my-8">
-                                    <img class="w-24" src="/img/<%= pizza.item.image %>" alt="">
-                                    <div class="flex-1 ml-4">
-                                        <h1>
-                                            <%= pizza.item.name%>
-                                        </h1>
-                                        <span>
-                                            <%= pizza.item.size%>
+                            <div class="pizza-list">
+                                <% for(let pizza of Object.values(session.cart.items)){ %>
+                                    <div class="flex items-center my-8">
+                                        <img class="w-24" src="/img/<%= pizza.item.image %>" alt="">
+                                        <div class="flex-1 ml-4">
+                                            <h1>
+                                                <%= pizza.item.name%>
+                                            </h1>
+                                            <span>
+                                                <%= pizza.item.size%>
+                                            </span>
+                                        </div>
+                                        <span class="flex-1">
+                                            <%= pizza.qty %> Pcs
                                         </span>
+                                        <span class="font-bold text-lg">₹<%= pizza.item.price%></span>
                                     </div>
-                                    <span class="flex-1">
-                                        <%= pizza.qty %> Pcs
-                                    </span>
-                                    <span class="font-bold text-lg">₹<%= pizza.item.price%></span>
+                                    <% } %>
+                            </div>
+
+                            <hr>
+
+
+                            <div class="text-right py-4">
+                                <div>
+                                    <span class="text-lg font-bold">Total amount:</span>
+                                    <span class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice%></span>
                                 </div>
-                                <% } %>
-                        </div>
-
-                        <hr>
-
-
-                        <div class="text-right py-4">
-                            <div>
-                                <span class="text-lg font-bold">Total amount:</span>
-                                <span class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice%></span>
-                            </div>
-                            <div>
-                                <form action="" class="mt-12">
-                                    <input class="border border-gray-400 p-2 w-1/2 mb-4" type="text"
-                                        placeholder="Phone Number">
-
-                                    <input class="border border-gray-400 p-2 w-1/2" type="text" placeholder="Address">
+                                <% if(user){ %>
                                     <div>
-                                        <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6"
-                                            type="submit">Order Now</button>
+                                        <form method="post" class="mt-12" id="payment-form">
+                                            <select class="border border-gray-400 p-2 w-1/2 mb-4" name="payment"
+                                                id="type-pay" required>
+                                                <option value="" selected disabled>Select Payment type</option>
+                                                <option value="COD">Cash on delivery</option>
+                                                <option value="Online">Pay Online</option>
+                                            </select>
+
+                                            <input class="border border-gray-400 p-2 w-1/2 mb-4" type="text"
+                                                name="phone" placeholder="Phone Number">
+
+                                            <input class="border border-gray-400 p-2 w-1/2" type="text" name="address"
+                                                placeholder="Address">
+                                            <div>
+                                                <button onclick="toaster()" id="orderbtn"
+                                                    class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6"
+                                                    type="submit">Order Now</button>
+                                            </div>
+
+                                        </form>
                                     </div>
-
-                                </form>
-                            </div>
-                            <!-- <a href="" class="btn-primary inline-block cursor-pointer px-6 py-2 rounded-full text-white font-bold mt-6">Login to Continue</a> -->
-                        </div>
-                    </div>
-                    <% }else{ %>
-                        <div class="empty-cart py-16">
-                            <div class="container mx-auto text-center">
-                                <h1 class="text-3xl font-bold mb-2">Cart Empty 😣</h1>
-                                <p class="text-gray-500 text-lg">You Probably haven't ordered a pizza yet. <br>
-                                    To order a pizza🍕, go to the main page
-                                </p>
-                                <lottie-player class="mx-auto"
-                                    src="https://assets5.lottiefiles.com/packages/lf20_w3ii0hq6.json"
-                                    background="transparent" speed="1"
-                                    style="width: 800px; height: 500px; ;padding:0px;" loop autoplay>
-                                </lottie-player>
-
-                                <a href="/"
-                                    class="go-back inline-block px-6 rounded-full btn-primary text-white font-bold mt-12">Go
-                                    Back</a>
+                                    <% }else{ %>
+                                        <a href="/login"
+                                            class="btn-primary inline-block cursor-pointer px-6 py-2 rounded-full text-white font-bold mt-6">Login
+                                            to Continue</a>
+                                        <% } %>
                             </div>
                         </div>
-                        <% } %>
-            </section>
+                        <% }else{ %>
+                            <div class="empty-cart py-16">
+                                <div class="container mx-auto text-center">
+                                    <h1 class="text-3xl font-bold mb-2">Cart Empty 😣</h1>
+                                    <p class="text-gray-500 text-lg">You Probably haven't ordered a pizza yet. <br>
+                                        To order a pizza🍕, go to the main page
+                                    </p>
+                                    <lottie-player class="mx-auto"
+                                        src="https://assets5.lottiefiles.com/packages/lf20_w3ii0hq6.json"
+                                        background="transparent" speed="1"
+                                        style="width: 800px; height: 500px; ;padding:0px;" loop autoplay>
+                                    </lottie-player>
+
+                                    <a href="/"
+                                        class="go-back inline-block px-6 rounded-full btn-primary text-white font-bold mt-12">Go
+                                        Back</a>
+                                </div>
+                            </div>
+                            <% } %>
+                </section>
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <script type="module" defer src="/js/app.js"></script>
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+                <script>
+                    // Ajax call
+                    const Payment = document.querySelector('#payment-form');
+                    if (Payment) {
+                        Payment.addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            let formdata = new FormData(Payment);
+                            let formObject = {}
+                            for (let [key, value] of formdata.entries()) {
+                                formObject[key] = value
+                            }
+                            console.log(formObject);
+
+
+
+                            // console.log(res.data);
+                            if (formObject.payment === 'Online') {
+                                razorpaygateway(formObject);
+
+                            }
+                            else {
+                                axios.post('/order', { formObject:formObject }).then(()=>{
+                                    setTimeout(() => {
+                                    window.location.href = '/orderspage';
+                                }, 1000);
+                                })
+                                
+                            }
+
+
+                       
+                       } )
+
+
+                    function razorpaygateway(formObject) {
+                        console.log('online payment')
+                        var options = {
+                            "key": "rzp_test_iViU4lic20ILDr",
+                            "amount": "50000",
+                            "currency": "INR",
+                            "name": "Dummy Academy",
+                            "description": "Pay & Checkout this Course, Upgrade your DSA Skill",
+                            "image": "https://media.geeksforgeeks.org/wp-content/uploads/20210806114908/dummy-200x200.png",
+                            "order_id": '<%= OrderId %>',
+                            "handler": function (response) {
+                                console.log(response);
+                                axios.post('/order', { formObject:formObject, response: response, orderId: '<%= OrderId %>' }).then(()=>{
+                                    setTimeout(() => {
+                                    window.location.href = '/orderspage';
+                                }, 1000);
+                                })
+
+                            },
+                            "prefill": {
+                                //Here we are prefilling random contact
+                                "contact": "9876543210",
+                                //name and email id, so while checkout
+                                "name": "Twinkle Sharma",
+                                "email": "smtwinkle@gmail.com"
+                            },
+                            "notes": {
+                                "description": "Best Course for SDE placements",
+                                "language": "Available in 4 major Languages JAVA, C/C++, Python, Javascript",
+                                "access": "This course have Lifetime Access"
+                            },
+                            "theme": {
+                                "color": "#2300a3"
+                            }
+
+                        };
+                        var razorpayObject = new Razorpay(options);
+                        console.log(razorpayObject);
+                        razorpayObject.on('payment.failed', function (response) {
+                            console.log(response);
+                            alert("This step of Payment Failed");
+                        });
+                        razorpayObject.open();
+                    }
+
+                    }
+                </script>
 
 
 
@@ -86,9 +185,30 @@
 
 
 
+                <script>
+                    function toaster() {
+                        console.log('toaster');
+                        toastr.options = {
+                            "closeButton": true,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "3000",
 
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
 
-            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                        Command: toastr["success"]("Order Done", "🍕Order successful")
+                    }
+                </script>
     </body>
 
 </html>

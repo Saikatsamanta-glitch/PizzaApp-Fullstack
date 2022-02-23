@@ -4,12 +4,14 @@
     </div>
     <div>
         <ul class="flex items-center">
-            <li class="ml-6"><a href="">Menu</a></li>
+            <li class="ml-6"><a href="/#menus">Menu</a></li>
             <li class="ml-6"><a href="">Offers</a></li>
+            
             <% if(user){ %>
                 <li class="ml-6">
                     <form id="logout" action="/logout" method="post"><a onclick="document.getElementById('logout').submit()" href="#" >Logout</a></form>    
                 </li>
+                <li class="ml-6"><a href="/orderspage">My Orders😉</a></li>
                 <% }else { %>
                     <li class="ml-6"><a href="/register">Register</a></li>
                     <li class="ml-6"><a href="/login">Login</a></li>

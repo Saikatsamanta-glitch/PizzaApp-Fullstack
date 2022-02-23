@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs')%>
+
+    <body>
+        <%- include('../partials/navbar.ejs')%>
+
+            <section class="orders light-section">
+                <div class="container mx-auto pt-12">
+                    <h1 class="font-bold text-lg mb-4">All orders</h1>
+                    <table class="w-full table-auto bg-white mx-6">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2 text-left">Orders</th>
+                                <th class="px-4 py-2 text-left">Address</th>
+                                <th class="px-4 py-2 text-left">Time</th>
+                                <th class="px-4 py-2 text-left">Payment type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(orders.length){ %>
+                                <% orders.forEach((order)=>{ %>
+                                    <% if(order.paymentType==='Online'){ %>
+                                    <tr style="background-color: rgb(131, 131, 131);">
+                                    <% }else{ %>
+                                        <tr style="background-color: rgb(240, 240, 240);">
+                                    <% } %>    
+
+                                        <td class="border px-4 py-2">
+                                            <a style="color: rgb(248, 56, 23);" href="/"><%= order._id %></a>
+                                        </td>
+                                        <td class="border px-4 py-2">
+                                            <%= order.address %>
+                                        </td>
+                                        <td class="border px-4 py-2">
+                                            <%= moment(order.createdAt).format('hh:mm A') %>
+                                        </td>
+                                        <td class="border px-4 py-2">
+                                            <%= order.paymentType %>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+
+                                        <% }else{ %>
+                                            <tr>No orders Found :(</tr>
+                                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+    </body>
+
+</html>

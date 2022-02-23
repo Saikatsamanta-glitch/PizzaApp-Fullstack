@@ -1,11 +1,17 @@
 let addtoCart=document.querySelectorAll('.add-to-cart');
 let count=document.querySelectorAll('.add');
 let counter=document.querySelector('#cartcounter');
+import {selectpay} from './selectpay.js';
+selectpay()
+
+// import {admin} from './admin';
+
+
 
 function updatecart(pizza){
     // 
     axios.post('/update-cart',pizza).then((res)=>{
-        console.log(res)
+        // console.log(res)
         counter.innerText=res.data.totalQty;
     
     });
@@ -28,4 +34,9 @@ addtoCart.forEach((btn)=>{
         updatecart(pizza);
     })
 });
+
+
+
+
+// admin();
 console.log('hi')
